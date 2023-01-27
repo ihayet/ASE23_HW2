@@ -4,9 +4,9 @@ import sys
 import os
 from strings import fmt, coerce
 from utils import getThe, setThe, setSeed, get_ofile
-from test import settings_test, rand_test, sym_test, num_test
+from test import settings_test, rand_test, sym_test, num_test, csv_test, data_test, stats_test
 
-help = 'script.lua : an example script with help text and a test suite\n (c)2022, Tim Menzies <timm@ieee.org>, BSD-2\n USAGE:   script.lua  [OPTIONS] [-g ACTION] \n OPTIONS: \n -d  --dump  on crash, dump stack = false \n -g  --go    start-up action      = data \n -h  --help  show help            = false \n -s  --seed  random number seed   = 937162211 \n ACTIONS:\n'
+help = 'script.lua : an example script with help text and a test suite\n (c)2022, Tim Menzies <timm@ieee.org>, BSD-2\n USAGE:   script.lua  [OPTIONS] [-g ACTION] \n OPTIONS: \n -d  --dump  on crash, dump stack = false \n -f  --file  name of file = etc/data/auto93.csv \n -g  --go    start-up action      = data \n -h  --help  show help            = false \n -s  --seed  random number seed   = 937162211 \n ACTIONS:\n'
 
 env_b4 = {}
 for env in os.environ:
@@ -51,9 +51,12 @@ def eg(key, str, fun):
 
 def main(options, help, funs):
     eg("the","show settings", settings_test)
-    eg("rand","generate, reset, regenerate same", rand_test)
+    #eg("rand","generate, reset, regenerate same", rand_test)
     eg("sym","check syms", sym_test)
     eg("num", "check nums", num_test)
+    eg("csv", "read from csv", csv_test)
+    eg("data", "read DATA csv", data_test)
+    eg("stats", "stats from DATA", stats_test)
 
     o_file = get_ofile()
     err = 0

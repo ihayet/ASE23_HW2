@@ -43,13 +43,14 @@ def oo(options):
     return val
 
 def o(options):
+    ks = list(options.keys())
+    ks.sort()
     val = '{'
-    for i, k in enumerate(options):
+    for i, k in enumerate(ks):
         val += ':'
         val += str(k)
         val += ' ' + str(options[k]).lower()
-
-        if i < len(options)-1:
+        if i < len(ks)-1:
             val += ' '
     val += '}'
 
@@ -66,7 +67,7 @@ def coerce(s):
     val = None
 
     try:
-        val = int(s)
+        val = float(s) if ('.' in s) else int(s)
     except TypeError as te:
         val = fun(s.strip())
     except ValueError as ve:

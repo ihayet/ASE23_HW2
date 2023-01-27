@@ -1,15 +1,18 @@
 from VAL import VAL
 from utils import rnd
 import math
+import re
 
 class NUM(VAL):
-    def __init__(self, n, s):
-        super().__init__(n, s)
+    def __init__(self, *args):
+        if len(args) > 0: 
+            super().__init__(args[0], args[1])
+            self.w = -1 if len(re.findall(r'-$', args[1])) > 0 else 1
         self.total, self.mu, self.m2 = 0, 0, 0
         self.lo, self.hi = -math.inf, math.inf
 
     def add(self, x):
-        if self.total != "?":
+        if x != "?":
             self.total += 1
             temp = x - self.mu
             self.mu += temp/self.total

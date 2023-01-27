@@ -2,8 +2,8 @@ from VAL import VAL
 import math
 
 class SYM(VAL):
-    def __init__(self, n, s):
-        super().__init__(n, s)
+    def __init__(self, *args):
+        if len(args) > 0: super().__init__(args[0], args[1])
         self.total, self.most, self.mode = 0, 0, None
         self.sym_counter = {}
 
